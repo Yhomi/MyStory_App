@@ -18,8 +18,11 @@ dotenv.config();
 
 const app = express();
 
-// import passport strategy
+//Body parser
+app.use(express.urlencoded({extended:false}))
+app.use(express.json())
 
+// import passport strategy
 require('./config/passport')(passport)
 
 // set view engine
@@ -48,6 +51,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
+app.use('/stories',require('./routes/stories'))
 
 const PORT = process.env.PORT || 5000
 
